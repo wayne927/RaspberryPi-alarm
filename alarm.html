@@ -1,0 +1,131 @@
+<html>
+
+<head>
+<title>Raspberry Pi alarm</title>
+
+<style>
+body {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.box {
+    display: inline-block;
+    font-size: 80px;
+    font-family: sans-serif;
+    text-align: center;
+    border: 0px solid;
+}
+
+.box select {
+    font-size: 80px;
+    width: 200px;
+    text-align: center;
+}
+
+.box select:focus {
+    background-color: #FFFFBB;
+    
+}
+
+input[type=text]{
+    font-size: 80px;
+    border: 2px solid;
+}
+input[type=text]:focus {
+    background-color: #FFFFBB;
+}
+
+input[type=submit] {
+    background-color: #AAAAFF;
+    font-size: 70px;
+    border: 0;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+input[type=submit]:hover {
+    cursor: pointer;
+    background-color: #BBBBFF;
+}
+
+#remove-alarm {
+    background-color: #FFAAAA;
+}
+#remove-alarm:hover {
+    background-color: #FFBBBB;
+}
+#check-crontab {
+    background-color: #CCCCCC;
+}
+#check-crontab:hover {
+    background-color: #EEEEEE;
+}
+
+</style>
+    
+</head>
+
+
+
+<body>
+
+<form action="/cgi-bin/alarm.py" method="GET">
+
+<div class="box">
+<!--Hour<br/>-->
+<!--<input type="text" name="alarm_hour" size=5>-->
+<select name="alarm_hour">
+<script>
+var i;
+for(i=0; i<24; i++)
+{
+    str = "<option value='"+i+"'>"+i+"</option>"
+    document.write(str);
+}
+</script>
+</select>
+</div>
+
+<div class="box">
+:
+</div>
+
+<div class="box">
+<!--Minute<br/>-->
+<!--<input type="text" name="alarm_minute" size=5>-->
+<select name="alarm_minute">
+<script>
+var i;
+for(i=0; i<51; i+=10)
+{
+    str = "<option value='"+i+"'>"+i+"</option>"
+    document.write(str);
+}
+</script>
+</select>
+</div>
+<br>
+<br>
+<input type="submit" value="Set alarm">    
+
+</form>
+
+<br>
+<br>
+
+<form action="/cgi-bin/alarm.py" method="GET">
+<input type="checkbox" checked name="remove_alarm" hidden>
+<input type="submit" value="Stop/Remove alarm" id="remove-alarm">
+</form>
+
+<br>
+<br>
+
+<form action="/cgi-bin/alarm.py" method="GET">
+<input type="checkbox" checked name="check_crontab" hidden>
+<input type="submit" value="Check crontab" id="check-crontab">
+</form>
+
+</body>
+
+</html>
